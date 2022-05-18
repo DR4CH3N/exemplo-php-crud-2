@@ -57,8 +57,11 @@ foreach ($listaDeFabricantes as $fabricante) {
         <tr>
             <td><?=$fabricante["id"]?></td>
             <td><?=$fabricante["nome"]?></td>
-            <td><a href="atualizar.php?teste">atualizar</a></td>
-            <!-- quando voce tem uma interrogação no final do link voce esta criando um parametro -->
+                                        <!-- valor do parametro  -->
+            <td><a href="atualizar.php?id=<?=$fabricante['id']?>">atualizar</a></td>
+                     <!-- parametro de URL -->
+                     <!-- "&" faz a concatenação caso voce quiser concatenar varios parametros -->
+            <!-- quando voce tem uma interrogação no link voce esta criando um parametro -->
             <td><a href="">Excluir</a></td>
         </tr> 
         <?php

@@ -1,10 +1,17 @@
+<?php
+    require_once '../src/funcoes-fabricantes.php';
+// obtendo o valor do parametro da URL
+    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+    $fabricante = lerUmFabricante($conexao, $id);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>atualizar - PHP</title>
+    <title>fabricantes atualizar - PHP</title>
 </head>
 <body>
     <div class="container">
@@ -19,9 +26,10 @@
         </p>
 
         <form action="" method="POST">
+            <input type="hidden" name="<?=$fabricante['id']?>">
         <p>
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome">
+            <input value="<?=$fabricante['nome']?>" type="text" name="nome" id="nome">
         </p>
         <button type="submit" name="atualizar">
             atualizar fabricante
