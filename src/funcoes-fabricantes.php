@@ -17,6 +17,30 @@ function LerFabricantes(PDO $conexao):array {
 }
 
 // inserir um fabricante
-function inserirFabricante(PDO $conexao, string $nome) {
-    
+function inserirFabricante(PDO $conexao, string $nome):void {
+    $sql = "INSERT INTO fabricantes(nome) VALUES (:nome)";
+    //(:nome) é um parametro e não deve ser usado como variavel ou const
+    // Void e um comando que indica que a função nao vai ter retorno
+    try {
+        // try vai tentar todos esses comandos
+        $consulta = $conexao->prepare($sql);
+        // PDO vai tratar o parametro como string, no caso tratar ele
+        // a sintaxe do bindParam funciona assim: bindParam('nome do parametro', $variavel_com_valor, constante de verificação)
+        $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $consulta->execute();
+        
+    } catch (Exception $erro) {
+        // catch vai executar esses comandos caso algo der errado
+
+        die("erro: " .$erro->getMessage());
+        // die vai fazer com que o codigo pare caso tiver algum erro, no caso vai mostrar uma mensagem de erro e vai parar o programa
+    }
 }
+
+/* try {
+        
+} catch (Exception $erro) {
+    die("erro: " .$erro->getMessage());
+}
+}
+@builtin PHP e desabilitar a segunda opção (recursos de linguagem PHP) */ 

@@ -5,9 +5,15 @@ if (isset($_POST['inserir']) ) {
     require_once "../src/funcoes-fabricantes.php";
 
     // capturando o que foi digitado no campo nome
-    $nome = $_POST['nome'];
+    //$nome = $_POST['nome'];
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+    // filter input vai sanitizar o campo 'nome'  e vai adicionar o nome do filtro
 
+    // chamando a função e passando os dados de conexão e o nome digitado
     inserirFabricante($conexao, $nome);
+
+    // redirecionamento, vai redirecionar para listar.php quando voce terminar de inserir um fabricante
+    header("location:listar.php");
 }
 ?>
 <!DOCTYPE html>
@@ -22,7 +28,14 @@ if (isset($_POST['inserir']) ) {
     <div class="container">
         <h1>Fabricantes | INSERT</h1>
         <hr>
-        
+        <p>
+            <a href="listar.php">Voltar para a lista de fabricantes</a>
+        </p>
+
+        <p>
+            <a href="../index.php">Home</a>
+        </p>
+
         <form action="" method="POST">
         <p>
             <label for="nome">Nome:</label>
