@@ -20,6 +20,14 @@ $listaDeFabricantes = LerFabricantes($conexao);
         <p>
             <a href="inserir.php">Inserir um novo fabricante</a>
         </p>
+        <!-- faz a att do fabricante -->
+        <?php if(isset($_GET['status']) && $_GET ['status'] == 'sucesso') { ?>
+        <p>Fabricante atualizado com sucesso!</p>
+        <?php } ?>
+
+        <!--</?php if(isset($_GET['status']) ) { ?>
+        <p>Fabricante atualizado com sucesso!</p>
+        </?php } ?/> -->
         
         <table>
             <caption>Lista de fabricantes</caption>
@@ -59,10 +67,10 @@ foreach ($listaDeFabricantes as $fabricante) {
             <td><?=$fabricante["nome"]?></td>
                                         <!-- valor do parametro  -->
             <td><a href="atualizar.php?id=<?=$fabricante['id']?>">atualizar</a></td>
+            <td><a href="excluir.php?id=<?=$fabricante['id']?>">Excluir</a></td>
                      <!-- parametro de URL -->
                      <!-- "&" faz a concatenação caso voce quiser concatenar varios parametros -->
             <!-- quando voce tem uma interrogação no link voce esta criando um parametro -->
-            <td><a href="">Excluir</a></td>
         </tr> 
         <?php
        }
