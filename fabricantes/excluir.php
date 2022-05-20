@@ -13,4 +13,3 @@ caso o usuario clicar em "OK" o comando para exclusão será executado
 caso o usuario clicar em "cancelar" o comando para exclusão não sera executado
 */
 // nota: apenas fabricantes que não tem produtos podem ser deletados
-

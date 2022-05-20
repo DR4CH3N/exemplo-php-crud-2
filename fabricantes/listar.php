@@ -67,7 +67,10 @@ foreach ($listaDeFabricantes as $fabricante) {
             <td><?=$fabricante["nome"]?></td>
                                         <!-- valor do parametro  -->
             <td><a href="atualizar.php?id=<?=$fabricante['id']?>">atualizar</a></td>
-            <td><a href="excluir.php?id=<?=$fabricante['id']?>">Excluir</a></td>
+            <td><a class="excluir" href="excluir.php?id=<?=$fabricante['id']?>">Excluir</a></td>
+            <?php 
+            
+            ?>
                      <!-- parametro de URL -->
                      <!-- "&" faz a concatenação caso voce quiser concatenar varios parametros -->
             <!-- quando voce tem uma interrogação no link voce esta criando um parametro -->
@@ -78,8 +81,18 @@ foreach ($listaDeFabricantes as $fabricante) {
             </tbody>
         </table>
     </div>
+
     <script>
-        
+        const links = document.querySelectorAll('.excluir');
+       for (let i = 0; i < links.length; i++) {
+        links[i].addEventListener("click", function(event){
+            event.preventDefault();
+            let resposta = confirm("Deseja realmente excluir?");
+            if (resposta) location.href = links[i].getAttribute('href');
+            });
+        }
     </script>
+
+    <!-- <a onclick="return confirm('Deseja mesmo excluir?')" -->
 </body>
 </html>
