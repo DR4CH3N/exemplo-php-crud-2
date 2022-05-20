@@ -78,6 +78,8 @@ foreach ($listaDeFabricantes as $fabricante) {
             </tbody>
         </table>
     </div>
-    
+    <script>
+        
+    </script>
 </body>
 </html>
