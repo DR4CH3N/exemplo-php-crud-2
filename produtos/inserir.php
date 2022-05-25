@@ -1,21 +1,4 @@
-<?php
-// verificando se o botão do form foi acionado
-if (isset($_POST['inserir']) ) {
-    // importando as funções e a conexão
-    require_once "../src/funcoes-fabricantes.php";
 
-    // capturando o que foi digitado no campo nome
-    //$nome = $_POST['nome'];
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-    // filter input vai sanitizar o campo 'nome'  e vai adicionar o nome do filtro
-
-    // chamando a função e passando os dados de conexão e o nome digitado
-    inserirFabricante($conexao, $nome);
-
-    // redirecionamento, vai redirecionar para listar.php quando voce terminar de inserir um fabricante
-    header("location:listar.php");
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -26,10 +9,10 @@ if (isset($_POST['inserir']) ) {
 </head>
 <body>
     <div class="container">
-        <h1>Fabricantes | INSERT</h1>
+        <h1>Produtos | INSERT</h1>
         <hr>
         <p>
-            <a href="listar.php">Voltar para a lista de fabricantes</a>
+            <a href="listar.php">Voltar para a lista de produtos</a>
         </p>
 
         <p>
@@ -41,8 +24,28 @@ if (isset($_POST['inserir']) ) {
             <label for="nome">Nome:</label>
             <input type="text" name="nome" id="nome">
         </p>
+        <p>
+            <label for="preco">Preço</label>
+            <input type="number" name="preco" id="preco" min="0" max="10000" step="0.01" required>
+        </p>
+        <p>
+            <label for="quantidade">Quantidade</label>
+            <input type="number" name="quantidade" id="quantidade" min="0" max="100" required>
+        </p>
+        <p>
+            <label for="fabricante">Fabricante</label>
+            <select name="fabricante" id="fabricante">
+                <option value=""></option>
+                <!-- opções de fabricantes existentes no BANCO -->
+            </select>
+        </p>
+        <p>
+            <label for="descricao">Descrição</label>
+            <textarea required name="descricao" id="descricao" cols="30" rows="3"></textarea>
+        </p>
+
         <button type="submit" name="inserir">
-            Inserir fabricante
+            Inserir Produto
         </button>
         </form>
     </div>
