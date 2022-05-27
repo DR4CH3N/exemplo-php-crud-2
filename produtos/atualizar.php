@@ -2,6 +2,8 @@
 require_once '../src/funcoes-fabricantes.php';
 require_once '../src/funcoes-produtos.php';
 
+
+
 $listaDeFabricantes = LerFabricantes($conexao);
 
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -30,6 +32,8 @@ $produto = lerUmProduto($conexao, $id);
 
         header("location:.php?status=sucesso");
     }
+
+    dump($produto);
 ?>
 
 <!DOCTYPE html>
