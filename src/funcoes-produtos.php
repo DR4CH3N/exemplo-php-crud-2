@@ -43,7 +43,39 @@ function lerProdutos(PDO $conexao):array {
         }
         
     }
+    function lerUmProduto(PDO $conexao, int $id):array {
+        $sql = "SELECT id, nome, preco, quantidade, descricao, fabricante_id FROM produtos WHERE id = :id";
+        try {
+            $consulta = $conexao->prepare($sql);
+            $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            // PDO fetch assoc vai retornar o resultado em array
+        }
+        // catch vai executar os comandos dentro dele caso algum comando do try não de certo
+        // die vai fazer com que o programa pare caso algum erro ocorra
+        catch (Exception $erro) {
+            die ("Erro: " .$erro->getMessage());
+        }
+        return $resultado;
+    }
 
+
+    function atualizarProduto(PDO $conexao, string $nome, 
+    float $preco, int $quantidade, string $descricao, int $fabricanteId):void {
+        $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+        try {
+            $consulta = $conexao->prepare($sql);
+            $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $consulta->bindParam(':preco', $preco, PDO::PARAM_STR);
+            $consulta->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
+            $consulta->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+            $consulta->bindParam(':fabricante_id', $fabricanteId, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Exception $erro) {
+            die("erro: " .$erro->getMessage());
+        }
+    }
     
 
 

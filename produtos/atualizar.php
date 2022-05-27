@@ -1,19 +1,35 @@
 <?php
 require_once '../src/funcoes-fabricantes.php';
+require_once '../src/funcoes-produtos.php';
+
 $listaDeFabricantes = LerFabricantes($conexao);
 
-if(isset($_POST['inserir'])){ // isset verifica se algum recurso é ativado, caso sim ele vai executar o codigo especifico
-    require_once '../src/funcoes-produtos.php';
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT);
-    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
-    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
-    $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+// pegando o valor do id e sanitizando por segurança
 
-    inserirProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId);
+$produto = lerUmProduto($conexao, $id);
+// chamando a função e recebendo os dados do produto
 
-    header("location:listar.php");
-}
+    if (isset($_POST['atualizar'])) {
+        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+        $preco = filter_input(INPUT_POST, 'preco',FILTER_SANITIZE_NUMBER_FLOAT);
+        $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
+        $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
+
+        atualizarProduto($conexao, $nome, 
+        $preco, $quantidade, $descricao, $fabricanteId);
+
+        header("localization:listar.php");
+
+        // header("location:listar.php")
+
+        // mensagem + refresh
+        // echo "<p>Nome atualizado com sucesso!</p>";
+        // header("refrese:3; url=listar.php");
+
+        header("location:.php?status=sucesso");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -22,11 +38,11 @@ if(isset($_POST['inserir'])){ // isset verifica se algum recurso é ativado, cas
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inserir - PHP</title>
+    <title>Atualizar - PHP</title>
 </head>
 <body>
     <div class="container">
-        <h1>Produtos | INSERT</h1>
+        <h1>Produtos | SELECT UPDATE</h1>
         <hr>
         <p>
             <a href="listar.php">Voltar para a lista de produtos</a>
@@ -69,8 +85,8 @@ if(isset($_POST['inserir'])){ // isset verifica se algum recurso é ativado, cas
             <textarea required name="descricao" id="descricao" cols="30" rows="3"></textarea>
         </p>
 
-        <button type="submit" name="inserir">
-            Inserir Produto
+        <button type="submit" name="atualizar">
+            Atualizar Produto
         </button>
         </form>
     </div>
