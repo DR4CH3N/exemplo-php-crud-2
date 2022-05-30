@@ -33,7 +33,7 @@ $produto = lerUmProduto($conexao, $id);
         header("location:.php?status=sucesso");
     }
 
-    dump($produto);
+    
 ?>
 
 <!DOCTYPE html>
@@ -59,15 +59,15 @@ $produto = lerUmProduto($conexao, $id);
         <form action="" method="POST">
         <p>
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome">
+            <input value="<?=$produto['nome']?>" type="text" name="nome" id="nome" required>
         </p>
         <p>
             <label for="preco">Preço</label>
-            <input type="number" name="preco" id="preco" min="0" max="10000" step="0.01" required>
+            <input type="number" value="<?=$produto['preco']?>" name="preco" id="preco" min="0" max="10000" step="0.01" required>
         </p>
         <p>
             <label for="quantidade">Quantidade</label>
-            <input type="number" name="quantidade" id="quantidade" min="0" max="100" required>
+            <input type="number" value="<?=$produto['quantidade']?>" name="quantidade" id="quantidade" min="0" max="100" required>
         </p>
         <p>
             <label for="fabricante">Fabricante</label>
@@ -75,7 +75,13 @@ $produto = lerUmProduto($conexao, $id);
                 <option value=""></option>
                 <?php foreach($listaDeFabricantes as $fabricante) { ?>
                     <!-- o value ID é para o banco -->
-                    <option value="<?=$fabricante['id'] ?>">
+                    <option 
+                    <?php
+                    /* se chave estrangeira for identica a chave primaria (ou seja, se o codigo do fabricante do produto bater com o codigo do fabricante), então coloque o atributo selected no option
+                    */
+                    if ($produto['fabricante_id'] === $fabricante['id']) echo " selected ";
+                    ?>
+                    value="<?=$fabricante['id'] ?>">
                         <?= $fabricante['nome'] ?> <!-- Exibição apenas -->
                     </option>
                 <?php 
@@ -86,7 +92,8 @@ $produto = lerUmProduto($conexao, $id);
         </p>
         <p>
             <label for="descricao">Descrição</label>
-            <textarea required name="descricao" id="descricao" cols="30" rows="3"></textarea>
+            <textarea required name="descricao" id="descricao" cols="30" rows="3">
+            <?=$produto['descricao']?></textarea>
         </p>
 
         <button type="submit" name="atualizar">

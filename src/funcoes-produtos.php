@@ -49,7 +49,7 @@ function lerProdutos(PDO $conexao):array {
             $consulta = $conexao->prepare($sql);
             $consulta->bindParam(':id', $id, PDO::PARAM_INT);
             $consulta->execute();
-            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
             // PDO fetch assoc vai retornar o resultado em array
         }
         // catch vai executar os comandos dentro dele caso algum comando do try não de certo
