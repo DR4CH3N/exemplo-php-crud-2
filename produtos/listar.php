@@ -40,7 +40,6 @@ $listaDeProdutos = lerProdutos($conexao);
             <p>Fabricante: <?=$produto["fabricante"]?></p> <!-- ID DO FABRICANTE -->
             
 
-
                                         <!-- valor do parametro  -->
             <P><a href="atualizar.php?id=<?=$produto['id']?>">atualizar produto</a></P>
             <p><a class="excluir" href="excluir.php?id=<?=$produto['id']?>">Excluir produto</a></p>
