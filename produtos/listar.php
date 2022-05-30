@@ -53,7 +53,7 @@ $listaDeProdutos = lerProdutos($conexao);
         ?>
     </div>
         
-        
+        <script src="../js/confirmacao.js"></script>
     
 </body>
 </html>

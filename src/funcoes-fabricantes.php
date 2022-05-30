@@ -65,7 +65,7 @@ function atualizarFabricante(PDO $conexao, int $id, string $nome):void {
     }
 }
 
-function excluirFabricante(PDO $conexao, int $id):void {
+function excluirProduto(PDO $conexao, int $id):void {
     $sql = "DELETE FROM fabricantes WHERE id = :id";
     try {
         $consulta = $conexao->prepare($sql);
@@ -75,6 +75,7 @@ function excluirFabricante(PDO $conexao, int $id):void {
         die("erro: " .$erro->getMessage());
     }
 }
+
 
 /* try {
         
