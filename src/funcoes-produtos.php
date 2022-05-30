@@ -61,19 +61,22 @@ function lerProdutos(PDO $conexao):array {
     }
 
 
-    function atualizarProduto(PDO $conexao, string $nome, 
+    function atualizarProduto(PDO $conexao, int $id, string $nome, 
     float $preco, int $quantidade, string $descricao, int $fabricanteId):void {
-        $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+        $sql = "UPDATE produtos SET nome = :nome, preco = :preco,
+        quantidade = :quantidade, descricao = :descricao, 
+        fabricante_id = :fabricanteId WHERE id = :id";
         try {
             $consulta = $conexao->prepare($sql);
+            $consulta->bindParam(':id', $id, PDO::PARAM_INT);
             $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
             $consulta->bindParam(':preco', $preco, PDO::PARAM_STR);
             $consulta->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
             $consulta->bindParam(':descricao', $descricao, PDO::PARAM_STR);
-            $consulta->bindParam(':fabricante_id', $fabricanteId, PDO::PARAM_INT);
+            $consulta->bindParam(':fabricanteId', $fabricanteId, PDO::PARAM_INT);
             $consulta->execute();
         } catch (Exception $erro) {
-            die("erro: " .$erro->getMessage());
+            die("erro: ".  $erro->getMessage());
         }
     }
     

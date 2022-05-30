@@ -14,15 +14,15 @@ $produto = lerUmProduto($conexao, $id);
 
     if (isset($_POST['atualizar'])) {
         $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-        $preco = filter_input(INPUT_POST, 'preco',FILTER_SANITIZE_NUMBER_FLOAT);
+        $preco = filter_input(INPUT_POST, 'preco',FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
         $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
         $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
 
-        atualizarProduto($conexao, $nome, 
+        atualizarProduto($conexao, $id, $nome, 
         $preco, $quantidade, $descricao, $fabricanteId);
 
-        header("localization:listar.php");
+        header("location:listar.php");
 
         // header("location:listar.php")
 
@@ -30,7 +30,7 @@ $produto = lerUmProduto($conexao, $id);
         // echo "<p>Nome atualizado com sucesso!</p>";
         // header("refrese:3; url=listar.php");
 
-        header("location:.php?status=sucesso");
+        
     }
 
     
